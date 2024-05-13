@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://wallpaperaccess.com/full/3503177.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  color: whitesmoke;
+}
+
+input {
+  outline: none;
+  border: 0px;
+  background-color: transparent;
+  text-align: center;
+  width: 100%;
+}
+
+.container {
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.67);
+  width: 300px;
+  border-radius: 15px;
+}
+
+.cityname {
+  margin-top: 60px;
+  font-size: 25px;
+  font-family: "verdana";
+}
+
+.datetime {
+  font-size: 18px;
+  font-family: "verdana";
+}
+
+.weather {
+  padding: 20px 40px;
+  width: 250px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  border: 2px solid whitesmoke;
+  background-color: rgba(255, 255, 255, 0.19);
+  margin-top: 60px;
+  backdrop-filter: blur(5px);
+}
+
+.weather > h1 {
+  font-size: 60px;
+  margin: 0px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.weather > p {
+  margin-bottom: 0;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+h3 {
+  margin-top: 50px;
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+.bg-card {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}

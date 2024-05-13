@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheather</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body">
+    <div class="bg-card">
+        <center>
+            <br>
+            <h1>Enter Your City Name</h1>
+            <div class="container">
+                <input type="text" placeholder="Enter Your City Name" id="input">
+            </div>
+
+            <h2 class="cityname" id="cityname">Erode, IN</h2>
+            <h2 class="datetime" id="datetime"></h2>
+
+            <div class="weather">
+                <h1 id="main">21°C</h1>
+                <p id="feelslike">Feels like 20°c</p>
+            </div>
+
+            <h3 id="description">Less Clouds</h3>
+        </center>
+    </div>
+
+</body>
+<script>
+
+    const input = document.getElementById('input');
+    const cityName = document.getElementById('cityname');
+    const dateTime = document.getElementById('datetime');
+    const main = document.getElementById('main');
+    const feelsLike = document.getElementById('feelslike');
+    const description = document.getElementById('description');
+    const body = document.getElementById('body');
+
+    async function fetchData(city) {
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=4fd239414e1c53315dd1cb53ed561e60`)
+        response = await response.json()
+        console.log(response)
+        return response
+    }
+
+    const changeBackground = (temp) => {
+        if (temp < 10) {
+            body.style.backgroundImage = 'url("https://images.pexels.com/photos/813872/pexels-photo-813872.jpeg?auto=compress&cs=tinysrgb&w=400")'
+        }
+        else if (temp >= 10 && temp < 20) {
+            body.style.backgroundImage = 'url("https://th.bing.com/th/id/OIP.9Gh9VPqyur3CCVgFpXIpcAHaE3?rs=1&pid=ImgDetMain")'
+        }
+        else if (temp >= 20 && temp < 30) {
+            body.style.backgroundImage = 'url("https://getwallpapers.com/wallpaper/full/4/b/3/542109.jpg")'
+        }
+        else if (temp >= 30 && temp < 40) {
+
+            body.style.backgroundImage = 'url("https://wallpapercave.com/wp/ouJpeig.jpg")'
+        }
+        else if (temp >= 40) {
+            body.style.backgroundImage = 'url("https://th.bing.com/th/id/OIP.6D_J-BDQuyh-j6Z6u0EqtAHaEo?rs=1&pid=ImgDetMain")'
+        }
+    }
+
+
+
+    function handleChange(event) {
+        fetchData(event.target.value).then((response) => {
+            changeBackground(response.main.temp)
+            main.innerText = Math.round(response.main.temp) + "°C"
+            feelsLike.innerText = "feels like "
+                + response.main.feels_like
+            cityName.innerText = response.name + ", " + response.sys.country
+            description.innerText = response.weather[0].main
+            let date = new Date(response.dt * 1000 - (response.timezone * 1000));
+            date = date.toString()
+            date = date.split(' ')
+            dateTime.innerText = date[2] + ' ' + date[1] + ' ' + date[3] + ', ' + date[0]
+        })
+    }
+    input.addEventListener('change', handleChange)
+</script>
+
+</html>
